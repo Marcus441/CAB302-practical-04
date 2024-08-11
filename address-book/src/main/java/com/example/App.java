@@ -12,8 +12,8 @@ public class App extends Application {
   
   @Override
     public void start(Stage stage) {
-        Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(label, WIDTH, HEIGHT);
+        FXMLLoader fxmlLoader= new FXMLLoader(App.class.getResource("hello-view.fxml"));  
+        Scene scene = new Scene(fxmlLoader, WIDTH, HEIGHT);
         stage.setScene(scene);
         stage.setTitle(TITLE); 
         stage.show();
