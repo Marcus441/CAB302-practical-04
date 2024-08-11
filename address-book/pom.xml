@@ -57,6 +57,8 @@
         </executions>
         <configuration>
           <mainClass>com.example.App</mainClass>
+          <modulePath>${project.build.directory}/lib</modulePath>
+          <addModules>javafx.controls,javafx.fxml</addModules> <!-- Specify required JavaFX modules -->
         </configuration>
       </plugin>
     </plugins>
