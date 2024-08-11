@@ -6,12 +6,16 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    @Override
+  public static final String TITLE = "Address Book";   
+  public static final int WIDTH= 640;
+  public static final int HEIGHT= 360;   
+  
+  @Override
     public void start(Stage stage) {
         Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(label, 400, 200);
+        Scene scene = new Scene(label, WIDTH, HEIGHT);
         stage.setScene(scene);
-        stage.setTitle("JavaFX App");
+        stage.setTitle(TITLE); 
         stage.show();
     }
 
