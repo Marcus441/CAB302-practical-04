@@ -41,9 +41,9 @@
         <TextField fx:id="phoneTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </GridPane>
       <HBox spacing="10.0" alignment="CENTER">
-        <Button text="Confirm" />
-        <Button text="Cancel" />
-        <Button text="Delete" />
+        <Button text="Confirm" onAction="#onEditConfirm" />
+        <Button text="New" onAction="#onAdd" maxWidth="Infinity" />
+        <Button text="Delete" onAction="#onDelete" />
       </HBox>
     </VBox>
   </HBox>
