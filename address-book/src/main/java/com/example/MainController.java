@@ -1,8 +1,11 @@
 package com.example;
 
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
+
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
@@ -19,6 +22,8 @@ public class MainController {
   private TextField emailTextField;
   @FXML
   private TextField phoneTextField;
+  @FXML
+  private VBox contactContainer;
 
   private IContactDAO contactDAO;
 
@@ -62,13 +67,25 @@ public class MainController {
 
   private void syncContacts() {
     contactsListView.getItems().clear();
-    contactsListView.getItems().addAll(contactDAO.getAllContacts());
+    List<Contact> contacts = contactDAO.getAllContacts();
+    boolean hasContact = !contacts.isEmpty();
+    if (hasContact) {
+      contactsListView.getItems().addAll(contacts);
+    }
+    // Show / hide based on whether there are contacts
+    contactContainer.setVisible(hasContact);
   }
 
   @FXML
   public void initialize() {
     contactsListView.setCellFactory(this::renderCell);
     syncContacts();
+    // Select the first contact and display its information
+    contactsListView.getSelectionModel().selectFirst();
+    Contact firstContact = contactsListView.getSelectionModel().getSelectedItem();
+    if (firstContact != null) {
+      selectContact(firstContact);
+    }
   }
 
   @FXML
@@ -109,6 +126,17 @@ public class MainController {
     if (selectedContact != null) {
       contactDAO.deleteContact(selectedContact);
       syncContacts();
+    }
+  }
+
+  @FXML
+  private void onCancel() {
+    // Find the selected contact
+    Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
+    if (selectedContact != null) {
+      // Since the contact hasn't been modified,
+      // we can just re-select it to refresh the text fields
+      selectContact(selectedContact);
     }
   }
 
